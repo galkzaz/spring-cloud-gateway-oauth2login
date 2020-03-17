@@ -1,9 +1,12 @@
 buildscript {
     repositories {
         mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
-        classpath 'com.bmuschko:gradle-cargo-plugin:2.3'
+        classpath 'com.bmuschko:gradle-cargo-plugin:2.7.1'
     }
 }
 
@@ -39,7 +42,7 @@ cargoRunLocal.dependsOn downloadUAA
 task uaa(dependsOn: cargoRunLocal) {}
 
 cargo {
-    containerId = 'tomcat8x'
+    containerId = 'tomcat9x'
     port = 8090
 
     deployable {
@@ -50,8 +53,7 @@ cargo {
     local {
         outputFile = file("$buildDir/uaa-server.log")
         installer {
-            installUrl = 'https://www-us.apache.org/dist/tomcat/tomcat-8/v8.5.43/bin/apache-tomcat-8.5.43.zip'
-
+            installUrl = 'https://www-us.apache.org/dist/tomcat/tomcat-9/v9.0.33/bin/apache-tomcat-9.0.33.zip'
             downloadDir = file("$buildDir/download")
             extractDir = file("$buildDir/extract")
         }

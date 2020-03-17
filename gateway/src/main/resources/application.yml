@@ -20,17 +20,16 @@ spring:
     oauth2:
       client:
         registration:
-          login-client:
-            provider: uaa
+          uaa:
             client-id: login-client
             client-secret: secret
             authorization-grant-type: authorization_code
-            redirect-uri-template: "{baseUrl}/login/oauth2/code/{registrationId}"
+            redirect-uri: "{baseUrl}/login/oauth2/code/login-client"
             scope: openid,profile,email,resource.read
         provider:
           uaa:
             authorization-uri: http://localhost:8090/uaa/oauth/authorize
             token-uri: http://localhost:8090/uaa/oauth/token
             user-info-uri: http://localhost:8090/uaa/userinfo
-            user-name-attribute: sub
+            userNameAttribute: sub
             jwk-set-uri: http://localhost:8090/uaa/token_keys
