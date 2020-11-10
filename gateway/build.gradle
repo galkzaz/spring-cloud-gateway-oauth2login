@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.4.0-M3'
+	id 'org.springframework.boot' version '2.4.0-RC1'
 	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
 	id 'java'
 }
@@ -31,7 +31,6 @@ dependencies {
 	implementation "org.springframework.boot:spring-boot-starter-webflux",
 			"org.springframework.boot:spring-boot-starter-oauth2-client",
 			"org.springframework.cloud:spring-cloud-starter-gateway",
-			"org.springframework.cloud:spring-cloud-gateway-server-security",
             // for sample controller in gateway
 			"org.springframework.boot:spring-boot-starter-thymeleaf",
 			"org.thymeleaf.extras:thymeleaf-extras-springsecurity5"

@@ -15,12 +15,11 @@
  */
 package sample;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.gateway.route.RouteLocator;
+import org.springframework.cloud.gateway.route.builder.GatewayFilterSpec;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
-import org.springframework.cloud.gateway.security.TokenRelayGatewayFilterFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
@@ -34,15 +33,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @SpringBootApplication
 public class GatewayApplication {
 
-	@Autowired
-	private TokenRelayGatewayFilterFactory filterFactory;
-
 	@Bean
 	public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
 		//@formatter:off
 		return builder.routes()
 				.route("resource", r -> r.path("/resource")
-						.filters(f -> f.filter(filterFactory.apply()))
+						.filters(GatewayFilterSpec::tokenRelay)
 						.uri("http://localhost:9000"))
 				.build();
 		//@formatter:on
